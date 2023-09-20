@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+  <title>UML Diagram</title>
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='uml.png') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+  <script>
+    function hideLogo() {
+      var logo = document.querySelector(".icon");
+      if (logo) {
+        logo.style.display = "none";
+      }
+    }
+    {% if result %}
+    window.onload = hideLogo;
+    {% endif %}
+  </script>
+</head>
+
+<body>
+  <h1>ELI5</h1>
+  <img
+    src="{{ url_for('static', filename='eli5.jpg') }}"
+    class="icon"
+    alt="Adi rocks"
+  />
+  <form action="/" method="post" onsubmit="hideLogo()">
+    <label for="openai_api_key">OpenAI API Key:</label>
+    <input type="textarea" id="openai_api_key" name="openai_api_key" required />
+    <label for="animal" style="padding-top: 5%"
+      >Enter the topic for which you need eli5 :</label
+    >
+    <input
+      type="text"
+      name="animal"
+      placeholder="Use case diagram for a bank website"
+      required
+    />
+    <input type="submit" value="Generate names" />
+  </form>
+  {% if result %}
+  <div class="result">{{ result }}</div>
+  {% endif %}
+</body>
